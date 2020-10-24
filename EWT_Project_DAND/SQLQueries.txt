@@ -1,0 +1,28 @@
+Exploring Weather Trends SQL Queries:
+ This file has the commands that i  used to download the CSV files
+from an online database using SQL.
+
+Query 1: To list out all cities in 'India'  
+ 
+SELECT *
+FROM city_list
+WHERE country like 'India' ;
+
+It returns 22 cities in which Delhi is the most nearby city to Gurgaon.So I am considering Delhi as my local city.  
+
+Query 2 : In order to join avg_temp data for both city and global level.We need to rename the columns.
+
+ALTER TABLE global_data RENAME COLUMN avg_temp to global_avg_temp;
+
+ALTER TABLE city_data RENAME COLUMN avg_temp to city_avg_temp;
+
+These query will rename the  column 'avg_temp'  to distinguish the  data  for city and global level.
+
+Query 3: To Download  the data  we are using for comparision using Join Query.
+
+SELECT global_data.year, global_data.global_avg_temp, city_avg_temp
+FROM global_data INNER JOIN city_data
+ON global_data.year=city_data.year
+WHERE city like 'Delhi';
+
+Saved the results of this query in AvgTempYearlyData.csv 
